@@ -10,7 +10,11 @@ export const AuthScreen = () => {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-[#5C3B58]">
       <div className="w-[420px]">
-        {authType === "SIGN_IN" ? <SignInCard /> : <SignUpCard />}
+        {authType === "SIGN_IN" ? (
+          <SignInCard setAuthType={setAuthType} />
+        ) : (
+          <SignUpCard setAuthType={setAuthType} />
+        )}
       </div>
     </div>
   );
