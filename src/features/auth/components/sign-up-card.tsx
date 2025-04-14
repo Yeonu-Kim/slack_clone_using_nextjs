@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@radix-ui/react-separator";
 import type { AuthType } from "@/features/auth/entities";
+import { implInputPresentation } from "@/features/auth/presentation/inputPresentation";
 
 type SocialSignUpButtonInfo = {
   type: "GOOGLE" | "GITHUB";
@@ -27,6 +28,15 @@ export const SignUpCard = ({
 }: {
   setAuthType: (input: AuthType) => void;
 }) => {
+  const inputStates = implInputPresentation().useValidator();
+
+  const { email, password, passwordConfirm } = inputStates;
+
+  const disableSubmit =
+    email.value.trim().length === 0 ||
+    password.value.trim().length === 0 ||
+    passwordConfirm.value.trim().length === 0;
+
   return (
     <Card className="w-full h-full p-8">
       <CardHeader className="flex flex-col gap-2">
@@ -40,26 +50,34 @@ export const SignUpCard = ({
         <form className="flex flex-col gap-2">
           <Input
             disabled={false}
-            value=""
-            onChange={() => {}}
+            value={email.value}
+            onChange={(e) => {
+              email.onChange(e.target.value);
+            }}
             placeholder="Email"
-            required
           />
           <Input
             disabled={false}
-            value=""
-            onChange={() => {}}
+            value={password.value}
+            onChange={(e) => {
+              password.onChange(e.target.value);
+            }}
             placeholder="Password"
-            required
           />
           <Input
             disabled={false}
-            value=""
-            onChange={() => {}}
+            value={passwordConfirm.value}
+            onChange={(e) => {
+              passwordConfirm.onChange(e.target.value);
+            }}
             placeholder="Confirm Password"
-            required
           />
-          <Button type="submit" className="w-full" size="lg">
+          <Button
+            type="submit"
+            className="w-full"
+            size="lg"
+            disabled={disableSubmit}
+          >
             Continue
           </Button>
           <Separator />
