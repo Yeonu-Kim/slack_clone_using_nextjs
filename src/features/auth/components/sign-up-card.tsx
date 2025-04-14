@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@radix-ui/react-separator";
-import type { AuthType } from "@/features/auth/entities";
+import type { AuthType } from "@/entities/auth";
 import { implInputPresentation } from "@/features/auth/presentation/inputPresentation";
 
 type SocialSignUpButtonInfo = {
